@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | BCA Freshers' Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://www.sikshapedia.com/public/data/colleges/university-of-allahabad-allahabad-uttar-pradesh/qMOAiBhbwY.webp" alt="Allahabad University Logo" class="h-12 w-12">
+                <h1 class="ml-3 text-xl font-bold text-blue-800">CCE, IPS University of Allahabad</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-600 hover:text-blue-800 font-medium">Home</a></li>
+                    <li><a href="about.html" class="text-blue-600 hover:text-blue-800 font-medium">About</a></li>
+                    <li><a href="event.html" class="text-gray-600 hover:text-blue-800 font-medium">Event</a></li>
+                    <li><a href="register.html" class="text-gray-600 hover:text-blue-800 font-medium">Register</a></li>
+                    <li><a href="contact.html" class="text-gray-600 hover:text-blue-800 font-medium">Contact</a></li>
+                    <li><a href="client-login.html" class="text-gray-600 hover:text-blue-800 font-medium">Pass</a></li>
+                    <li><a href="admin-login.html" class="text-gray-600 hover:text-blue-800 font-medium">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">About the Freshers' Party</h2>
+                
+                <div id="aboutSections">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+
+                <script>
+                    function loadAboutContent() {
+                        fetch('content-data.json')
+                            .then(response => response.json())
+                            .then(data => {
+                                const container = document.getElementById('aboutSections');
+                                container.innerHTML = '';
+                                
+                                data.about.sections.forEach(section => {
+                                    const sectionDiv = document.createElement('div');
+                                    sectionDiv.className = 'mb-8';
+                                    
+                                    const title = document.createElement('h3');
+                                    title.className = 'text-xl font-bold mb-4 text-blue-700';
+                                    title.textContent = section.title;
+                                    sectionDiv.appendChild(title);
+                                    
+                                    section.content.forEach(paragraph => {
+                                        const p = document.createElement('p');
+                                        p.className = 'text-gray-700 mb-4';
+                                        p.textContent = paragraph;
+                                        sectionDiv.appendChild(p);
+                                    });
+                                    
+                                    container.appendChild(sectionDiv);
+                                });
+                            })
+                            .catch(error => console.error('Error loading about content:', error));
+                    }
+                    document.addEventListener('DOMContentLoaded', loadAboutContent);
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">BCA Freshers' Party 2024</h3>
+                    <p>Center of Computer Education<br>Institute of Professional Studies<br>University of Allahabad, Prayagraj</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-facebook-f text-2xl"></i></a>
+                        <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-instagram text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p>&copy; 2025 Aryan Dubey. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
