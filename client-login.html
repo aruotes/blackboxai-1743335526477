@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Your Pass | BCA Freshers' Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <img src="https://www.sikshapedia.com/public/data/colleges/university-of-allahabad-allahabad-uttar-pradesh/qMOAiBhbwY.webp" alt="Allahabad University Logo" class="h-16 w-16 mx-auto">
+                <h1 class="text-2xl font-bold mt-4 text-blue-800">Download Your Pass</h1>
+                <p class="text-gray-600">BCA Freshers' Party 2024</p>
+            </div>
+            
+            <form id="clientLoginForm">
+                <div class="mb-4">
+                    <label for="clientEmail" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                    <input type="email" id="clientEmail" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition duration-300">Login</button>
+            </form>
+            <div id="clientError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-lg"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
