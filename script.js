@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('registrations', JSON.stringify([]));
     }
 
-    // Countdown Timer for Event Date (April 5, 2025)
-    const eventDate = new Date('April 5, 2025 18:00:00').getTime();
+    // Countdown Timer for Event Date (April 10, 2025)
+    const eventDate = new Date('April 10, 2025 12:00:00').getTime();
     
     function updateCountdown() {
         const now = new Date().getTime();
