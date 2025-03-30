@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | BCA Freshers' Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Admin Header -->
+    <header class="bg-blue-800 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://www.sikshapedia.com/public/data/colleges/university-of-allahabad-allahabad-uttar-pradesh/qMOAiBhbwY.webp" alt="Allahabad University Logo" class="h-10 w-10">
+                <h1 class="ml-3 text-xl font-bold">Admin Dashboard</h1>
+            </div>
+            <div>
+                <button onclick="if(confirm('Are you sure you want to logout?')) { 
+                    document.getElementById('logoutMessage').classList.remove('hidden');
+                    adminLogout(); 
+                }" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+                <div id="logoutMessage" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white p-6 rounded-lg text-center">
+                        <p class="text-lg font-bold mb-4">Logging out...</p>
+                        <p>You will be redirected to the homepage shortly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Navigation Tabs -->
+        <div class="flex border-b border-gray-200 mb-6">
+            <button class="tab-btn py-2 px-4 font-medium text-blue-600 border-b-2 border-blue-600" data-tab="registrations">Registrations</button>
+            <button class="tab-btn py-2 px-4 font-medium text-gray-500 hover:text-blue-600" data-tab="content">Content Management</button>
+        </div>
+
+        <!-- Registrations Tab -->
+        <div id="registrations" class="tab-content active">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6">Registered Candidates</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationsTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Management Tab -->
+        <div id="content" class="tab-content">
+            <!-- Event Content Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6">Event Content</h2>
+                <form id="eventForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Event Date</label>
+                        <input type="text" id="eventDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Event Schedule</label>
+                        <div id="scheduleItems" class="space-y-2">
+                            <!-- Schedule items will be added here -->
+                        </div>
+                        <button type="button" onclick="addScheduleItem()" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                            <i class="fas fa-plus mr-2"></i>Add Time Slot
+                        </button>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
+                        <i class="fas fa-save mr-2"></i>Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <!-- About Content Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6">About Content</h2>
+                <div id="aboutSectionsAdmin">
+                    <!-- Sections will be loaded here -->
+                </div>
+                <button type="button" onclick="addAboutSection()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                    <i class="fas fa-plus mr-2"></i>Add Section
+                </button>
+                <button type="button" onclick="saveAboutContent()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg mt-4">
+                    <i class="fas fa-save mr-2"></i>Save About Content
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Aryan Dubey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Content Management Functions
+        function addScheduleItem(time = '', activity = '') {
+            const container = document.getElementById('scheduleItems');
+            const index = container.children.length;
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'flex items-center gap-2';
+            itemDiv.innerHTML = `
+                <input type="text" value="${time}" placeholder="Time" 
+                       class="w-1/3 px-3 py-2 border rounded-lg">
+                <input type="text" value="${activity}" placeholder="Activity" 
+                       class="w-2/3 px-3 py-2 border rounded-lg">
+                <button type="button" onclick="this.parentNode.remove()" 
+                        class="text-red-500 hover:text-red-700">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            container.appendChild(itemDiv);
+        }
+
+        function saveEventData() {
+            const eventData = {
+                date: document.getElementById('eventDate').value,
+                schedule: []
+            };
+
+            document.querySelectorAll('#scheduleItems > div').forEach(item => {
+                const inputs = item.querySelectorAll('input');
+                if (inputs[0].value && inputs[1].value) {
+                    eventData.schedule.push({
+                        time: inputs[0].value,
+                        activity: inputs[1].value
+                    });
+                }
+            });
+
+            // Save to localStorage
+            localStorage.setItem('eventData', JSON.stringify(eventData));
+            alert('Event schedule saved successfully!');
+            
+            // Also update the in-memory content-data.json structure
+            fetch('content-data.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.event = eventData;
+                    localStorage.setItem('contentData', JSON.stringify(data));
+                })
+                .catch(error => console.error('Error loading content-data:', error));
+        }
+
+        function loadEventData() {
+            // Check localStorage first
+            const savedData = localStorage.getItem('eventData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('eventDate').value = data.date;
+                const container = document.getElementById('scheduleItems');
+                container.innerHTML = '';
+                data.schedule.forEach(item => {
+                    addScheduleItem(item.time, item.activity);
+                });
+                return;
+            }
+            
+            // Fallback to content-data.json
+            fetch('content-data.json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('eventDate').value = data.event.date;
+                    const container = document.getElementById('scheduleItems');
+                    container.innerHTML = '';
+                    data.event.schedule.forEach(item => {
+                        addScheduleItem(item.time, item.activity);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // About Content Management
+        function loadAboutContentAdmin() {
+            fetch('content-data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('aboutSectionsAdmin');
+                    container.innerHTML = '';
+                    
+                    data.about.sections.forEach((section, index) => {
+                        const sectionDiv = document.createElement('div');
+                        sectionDiv.className = 'mb-6 p-4 border border-gray-200 rounded-lg';
+                        sectionDiv.innerHTML = `
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-medium mb-2">Section Title</label>
+                                <input type="text" value="${section.title}" data-index="${index}" data-field="title" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-medium mb-2">Content</label>
+                                <textarea data-index="${index}" data-field="content" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg h-32">${section.content.join('\n')}</textarea>
+                            </div>
+                            <button type="button" onclick="removeAboutSection(${index})" 
+                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                                <i class="fas fa-trash mr-2"></i>Remove Section
+                            </button>
+                        `;
+                        container.appendChild(sectionDiv);
+                    });
+                });
+        }
+
+        function addAboutSection() {
+            const container = document.getElementById('aboutSectionsAdmin');
+            const index = container.children.length;
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'mb-6 p-4 border border-gray-200 rounded-lg';
+            sectionDiv.innerHTML = `
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Section Title</label>
+                    <input type="text" data-index="${index}" data-field="title" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2">Content</label>
+                    <textarea data-index="${index}" data-field="content" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg h-32"></textarea>
+                </div>
+                <button type="button" onclick="removeAboutSection(${index})" 
+                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                    <i class="fas fa-trash mr-2"></i>Remove Section
+                </button>
+            `;
+            container.appendChild(sectionDiv);
+        }
+
+        function removeAboutSection(index) {
+            if (confirm('Are you sure you want to remove this section?')) {
+                const container = document.getElementById('aboutSectionsAdmin');
+                container.children[index].remove();
+            }
+        }
+
+        function saveAboutContent() {
+            const aboutData = { sections: [] };
+            
+            document.querySelectorAll('#aboutSectionsAdmin > div').forEach(sectionDiv => {
+                const title = sectionDiv.querySelector('input[data-field="title"]').value;
+                const content = sectionDiv.querySelector('textarea[data-field="content"]').value.split('\n');
+                
+                if (title && content.length > 0) {
+                    aboutData.sections.push({
+                        title: title,
+                        content: content
+                    });
+                }
+            });
+
+            // Save to localStorage
+            const savedData = localStorage.getItem('contentData') || '{}';
+            const data = JSON.parse(savedData);
+            data.about = aboutData;
+            localStorage.setItem('contentData', JSON.stringify(data));
+            alert('About content saved successfully!');
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if(btn.dataset.tab === tabName) {
+                    btn.classList.add('text-blue-600', 'border-blue-600');
+                    btn.classList.remove('text-gray-500');
+                } else {
+                    btn.classList.remove('text-blue-600', 'border-blue-600');
+                    btn.classList.add('text-gray-500');
+                }
+            });
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                if(content.id === tabName) {
+                    content.classList.add('active');
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.remove('active');
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // Set up tab click handlers
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
+        
+        // Initialize first tab
+        switchTab('registrations');
+
+        // Form submission handler
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveEventData();
+        });
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('adminLoggedIn')) {
+                window.location.href = 'admin-login.html';
+            }
+            loadRegistrations();
+            loadEventData();
+            loadAboutContentAdmin();
+        });
+    </script>
+</body>
+</html>
