@@ -1,0 +1,42 @@
+{
+  "event": {
+    "date": "April 5, 2025",
+    "schedule": [
+      {"time": "6:00 PM", "activity": "Welcome Ceremony"},
+      {"time": "6:30 PM", "activity": "Icebreaker Activities"},
+      {"time": "7:30 PM", "activity": "Cultural Performances"},
+      {"time": "8:30 PM", "activity": "Dinner"},
+      {"time": "9:30 PM", "activity": "DJ Night"}
+    ]
+  },
+  "about": {
+    "sections": [
+      {
+        "title": "Welcome to BCA 2024-27",
+        "content": [
+          "The Center of Computer Education at the Institute of Professional Studies, University of Allahabad, is proud to welcome the new batch of BCA students (2024-27) to our annual Freshers' Party. This event marks the beginning of your exciting journey in the world of computer applications.",
+          "Our goal is to foster camaraderie among new students and help you connect with your peers, seniors, and faculty members in a relaxed and enjoyable atmosphere."
+        ]
+      },
+      {
+        "title": "About CCE, IPS",
+        "content": [
+          "The Center of Computer Education (CCE) at the Institute of Professional Studies (IPS) is a premier institution for computer education in Prayagraj. Established with the vision to provide quality education in computer applications, CCE has been nurturing talented professionals for over two decades.",
+          "Our BCA program is designed to provide students with a strong foundation in computer applications while emphasizing practical skills and industry-relevant knowledge."
+        ]
+      },
+      {
+        "title": "University of Allahabad",
+        "content": [
+          "Founded in 1887, the University of Allahabad is one of India's oldest and most prestigious universities. Known as the 'Oxford of the East,' it has a rich tradition of academic excellence and has produced numerous distinguished alumni.",
+          "The Institute of Professional Studies (IPS) was established in 2001 to provide professional education in various disciplines, including computer applications, management, and biotechnology."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "address": "Center of Computer Education, University of Allahabad",
+    "phone": "+91 98765 43210",
+    "email": "freshers@ccellduniv.edu.in"
+  }
+}
