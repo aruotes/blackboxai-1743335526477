@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Registrations</title>
+    <script>
+        function showRegistrations() {
+            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+            document.getElementById('output').textContent = JSON.stringify(registrations, null, 2);
+        }
+    </script>
+</head>
+<body onload="showRegistrations()">
+    <h1>Current Registrations</h1>
+    <pre id="output"></pre>
+</body>
+</html>
