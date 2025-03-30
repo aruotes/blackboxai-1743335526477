@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | BCA Freshers' Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Admin Header -->
+    <header class="bg-blue-800 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://www.sikshapedia.com/public/data/colleges/university-of-allahabad-allahabad-uttar-pradesh/qMOAiBhbwY.webp" alt="Allahabad University Logo" class="h-10 w-10">
+                <h1 class="ml-3 text-xl font-bold">Admin Dashboard</h1>
+            </div>
+            <div>
+                <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Navigation Tabs -->
+        <div class="flex border-b border-gray-200 mb-6">
+            <button class="tab-btn py-2 px-4 font-medium text-blue-600 border-b-2 border-blue-600" data-tab="registrations">Registrations</button>
+            <button class="tab-btn py-2 px-4 font-medium text-gray-500" data-tab="content">Content Management</button>
+        </div>
+
+        <!-- Registrations Tab -->
+        <div id="registrations" class="tab-content active">
+            <!-- Registration content here -->
+        </div>
+
+        <!-- Content Management Tab -->
+        <div id="content" class="tab-content">
+            <!-- Event Content -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6">Event Content</h2>
+                <form id="eventForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Event Date</label>
+                        <input type="text" id="eventDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg" value="April 5 2025">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Event Schedule</label>
+                        <div id="scheduleItems" class="space-y-2">
+                            <!-- Schedule items will be added here -->
+                        </div>
+                        <button type="button" onclick="addScheduleItem()" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                            <i class="fas fa-plus mr-2"></i>Add Time Slot
+                        </button>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
+                        <i class="fas fa-save mr-2"></i>Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <!-- About Content -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6">About Content</h2>
+                <div id="aboutSectionsAdmin">
+                    <!-- About sections will be loaded here -->
+                </div>
+                <button type="button" onclick="addAboutSection()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                    <i class="fas fa-plus mr-2"></i>Add Section
+                </button>
+                <button type="button" onclick="saveAboutContent()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg mt-4">
+                    <i class="fas fa-save mr-2"></i>Save About Content
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab Switching - Guaranteed to Work
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.add('hidden');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if(btn.dataset.tab === tabId) {
+                    btn.classList.add('text-blue-600', 'border-blue-600');
+                    btn.classList.remove('text-gray-500');
+                } else {
+                    btn.classList.remove('text-blue-600', 'border-blue-600');
+                    btn.classList.add('text-gray-500');
+                }
+            });
+        }
+
+        // Set up tab click handlers
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
+
+        // Initialize first tab
+        switchTab('registrations');
+
+        // Basic logout function
+        function logout() {
+            if(confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Initialize with sample data if none exists
+        if(!localStorage.getItem('eventData')) {
+            localStorage.setItem('eventData', JSON.stringify({
+                date: "April 5 2025",
+                schedule: [
+                    {time: "6:00 PM", activity: "Welcome Ceremony"},
+                    {time: "6:30 PM", activity: "Icebreaker Activities"},
+                    {time: "7:30 PM", activity: "Cultural Performances"},
+                    {time: "8:30 PM", activity: "Dinner"},
+                    {time: "9:30 PM", activity: "DJ Night"}
+                ]
+            }));
+        }
+
+        if(!localStorage.getItem('aboutData')) {
+            localStorage.setItem('aboutData', JSON.stringify({
+                sections: [
+                    {
+                        title: "Welcome to BCA 2024-27",
+                        content: [
+                            "The Center of Computer Education at the Institute of Professional Studies welcomes you!",
+                            "This event marks the beginning of your journey in computer applications."
+                        ]
+                    }
+                ]
+            }));
+        }
+    </script>
+</body>
+</html>
