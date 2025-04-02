@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Countdown Timer for Event Date (April 10, 2025)
-    const eventDate = new Date('April 10, 2025 12:00:00').getTime();
+    const eventDate = new Date('April 07, 2025 12:00:00').getTime();
     
     function updateCountdown() {
         const now = new Date().getTime();
